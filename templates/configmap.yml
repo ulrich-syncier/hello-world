@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fair-worm-configmap
+data:
+  myvalue: "Hello World"
+  food: "PIZZA"
+  {{- $files := .Files }}
+  {{- range tuple "test.toml" "test.toml"}}
+  {{ . }}: |-
+    {{ $files.Get .}}
+  {{- end}}
+  
